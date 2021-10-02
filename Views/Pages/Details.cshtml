@@ -1,0 +1,10 @@
+﻿@model Theme
+@{
+    ViewBag.Title = Model.Name;
+    Layout = "_Layout";
+}
+<div class="row my-2">
+    <h6 class="pr-4">@Model.Name</h6>
+    <h6 class="pr-4">@Model.CreationDate.ToString("MM,dd,yyyy")</h6>
+    <h6 style="color:gray;">@Model.Creator.UserName</h6>
+</div>

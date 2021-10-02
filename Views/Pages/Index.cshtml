@@ -14,7 +14,7 @@ else
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
+                <tr onclick="details(@item.Id)" style="cursor:pointer;">
                     <td>@item.Name</td>
                     <td>@item.CreationDate.ToString("MM,dd,yyyy")</td>
                     <td>@item.Creator.UserName</td>
@@ -23,4 +23,12 @@ else
             }
         </tbody>
     </table>
+}
+@section Scripts
+{
+    <script>
+   function details(themeId) {
+       window.location.href = '@Url.Action("Details","Pages")?id=' + themeId;
+           }
+    </script>
 }

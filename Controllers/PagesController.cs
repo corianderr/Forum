@@ -41,6 +41,16 @@ namespace Forum.Controllers
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
-
+        public IActionResult Details(int id)
+        {
+            var theme = _context.Themes.Include(t => t.Creator).FirstOrDefault(t => t.Id == id);
+            return View(theme);
+        }
+        public IActionResult Search(string keyWord)
+        {
+            List<Theme> themes = _context.Themes.Include(p => p.Creator).Where(u =>
+                u.Name.Contains(keyWord)).ToList();
+            return View("Index", themes);
+        }
     }
 }
