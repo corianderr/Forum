@@ -1,10 +1,74 @@
-﻿@model Theme
+﻿@model Forum.ViewModels.DetailsViewModel
 @{
-    ViewBag.Title = Model.Name;
+    ViewBag.Title = Model.Theme.Name;
     Layout = "_Layout";
 }
-<div class="row my-2">
-    <h6 class="pr-4">@Model.Name</h6>
-    <h6 class="pr-4">@Model.CreationDate.ToString("MM,dd,yyyy")</h6>
-    <h6 style="color:gray;">@Model.Creator.UserName</h6>
+<div style="width:80%;" class="mx-auto">
+    <div class="row my-2">
+        <h6 class="pr-4">@Model.Theme.Name</h6>
+        <h6 class="pr-4">@Model.Theme.CreationDate.ToString("MM,dd,yyyy")</h6>
+        <h6 style="color:gray;">@Model.Theme.Creator.UserName</h6>
+    </div>
+    <div>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <form style="text-align:center;" id="responseForm">
+                <div>
+                    <textarea id="response" class="w-100"></textarea>
+                </div>
+                <br /><input type="submit" value="Response" />
+            </form>
+        }
+        <div id="comments">
+            @if (Model.Responses.Count == 0)
+            {
+                <p>There are no any responses yet. Be the first one!</p>
+            }
+            else
+            {
+                @foreach (var item in Model.Responses)
+                {
+                    <div class="media my-2 col">
+                        @if (item.User.ProfilePic.FileExtension != null)
+                        {
+                            <img class="mr-3" src="../Avatars/@item.User.ProfilePic.FileName@item.User.ProfilePic.FileExtension" alt="avatar" style="vertical-align: middle; width: 80px; height: 80px;">
+                        }
+                        else
+                        {
+                            <img class="mr-3" src="../files/no-avatar.png" alt="no avatar" style="vertical-align: middle; width: 80px; height: 80px;">
+                        }
+                        <div class="media-body">
+                            <h6 class="mt-0">@item.User.UserName</h6>
+                            <span>@item.CreationDate</span><br />
+                            <p>@item.Text</p>
+                        </div>
+                    </div>
+                    <hr />
+                }
+                <div id="newComment"></div>
+            }
+        </div>
+    </div>
 </div>
+@section Scripts
+{
+    <script>
+        $('#responseForm').on('submit', function (event) {
+            event.preventDefault();
+            var text = $('#response').val();
+            sendComment(@Model.Theme.Id, text);
+            document.getElementById('newComment').scrollIntoView();
+        });
+        function sendComment(themeId, text) {
+               $.ajax({
+                   url: '@Url.Action("CreateResponse", "Pages")',
+                   type: 'POST',
+                   data: { 'themeId': themeId, 'text': text },
+                   success: console.log('все ок'),
+               });
+            setTimeout(function () {
+                window.location.reload();
+            }, 1500)
+           }
+    </script>
+}

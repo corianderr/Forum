@@ -1,0 +1,16 @@
+﻿@model Response
+<div class="media my-2">
+    @if (Model.User.ProfilePic.FileExtension != null)
+    {
+        <img class="mr-3" src="../Avatars/@Model.User.ProfilePic.FileName@Model.User.ProfilePic.FileExtension" alt="avatar" style="vertical-align: middle; width: 80px; height: 80px;">
+    }
+    else
+    {
+        <img class="mr-3" src="../files/no-avatar.png" alt="no avatar" style="vertical-align: middle; width: 80px; height: 80px;">
+    }
+<div class="media-body">
+    <h6 class="mt-0">@Model.User.UserName</h6>
+    <span>@Model.CreationDate</span><br />
+    <p>@Model.Text</p>
+</div>
+</div>

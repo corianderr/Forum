@@ -11,6 +11,7 @@ namespace Forum.Models
     {
         public DbSet<AvatarFile> Avatars { get; set; }
         public DbSet<Theme> Themes { get; set; }
+        public DbSet<Response> Responses { get; set; }
         public ForumContext(DbContextOptions<ForumContext> options) : base(options) { }
     }
 }
