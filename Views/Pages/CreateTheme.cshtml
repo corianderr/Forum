@@ -1,0 +1,15 @@
+﻿@model Theme
+@{
+    ViewBag.Title = "Create theme";
+    Layout = "_Layout";
+}
+<h4 class="text-center">Theme creation</h4>
+<form method="post" asp-controller="Pages" asp-action="CreateTheme" style="text-align:center;">
+    <div asp-validation-summary="ModelOnly"></div>
+    <div>
+        <label asp-for="Name"></label><br />
+        <input asp-for="Name" />
+        <span asp-validation-for="Name"></span>
+    </div>
+        <br /><input type="submit" value="Create" />
+</form>

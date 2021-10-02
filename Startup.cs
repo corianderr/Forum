@@ -1,4 +1,5 @@
 using Forum.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -38,7 +39,6 @@ namespace Forum
                     options.Password.RequireDigit = false;
                 })
                 .AddEntityFrameworkStores<ForumContext>();
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
