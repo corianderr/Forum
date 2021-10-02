@@ -69,7 +69,7 @@ namespace Forum.Controllers
                         if (result.Succeeded)
                         {
                             await _signInManager.SignInAsync(user, false);
-                            return RedirectToAction("Index", "Home");
+                            return RedirectToAction("PersonalArea", "Account");
                         }
                         foreach (var error in result.Errors)
                             ModelState.AddModelError("Mes", error.Description);
@@ -108,7 +108,7 @@ namespace Forum.Controllers
                     {
                         return Redirect(model.ReturnUrl);
                     }
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("PersonalArea", "Account");
                 }
                 ModelState.AddModelError("Mes", "Неправильный логин и (или) пароль");
             }
