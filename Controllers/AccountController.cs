@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -119,6 +120,11 @@ namespace Forum.Controllers
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction("Login", "Account");
+        }
+        public IActionResult PersonalArea()
+        {
+            var user = _context.Users.Include(u => u.ProfilePic).FirstOrDefault(u => u.Id == _userManager.GetUserId(User));
+            return View(user);
         }
     }
 

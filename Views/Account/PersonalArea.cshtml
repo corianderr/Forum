@@ -1,0 +1,21 @@
+﻿@model User
+@{
+    ViewBag.Title = Model.UserName;
+    Layout = "_Layout";
+}
+<div class="row" style="padding-top: 20px;">
+    <div class="col-4">
+        @if (Model.ProfilePic.FileExtension != null)
+        {
+            <img src="~/Avatars/@Model.ProfilePic.FileName@Model.ProfilePic.FileExtension" alt="avatar" style="vertical-align: middle; width: 150px; height: 150px; margin-left: auto; margin-right: auto; display: block;">
+        }
+        else
+        {
+            <img src="~/files/no-avatar.png" alt="avatar" style="vertical-align: middle; width: 150px; height: 150px; margin-left: auto; margin-right: auto; display: block;">
+        }
+    </div>
+    <div style="width:66%;padding-left:40px;">
+        <span style="padding-right:40px;font-size:30px;">@Model.UserName</span>
+        <br /><p>Email: @Model.Email</p>
+    </div>
+</div> 
