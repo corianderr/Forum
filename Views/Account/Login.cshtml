@@ -1,0 +1,28 @@
+﻿@model Forum.ViewModels.LoginViewModel
+@{
+    ViewBag.Title = "Login";
+    Layout = "_Layout";
+}
+<h4 class="text-center">Login</h4>
+<form method="post" asp-controller="Account" asp-action="Login"
+      asp-route-returnUrl="@Model.ReturnUrl" style="text-align:center;">
+    <div asp-validation-summary="ModelOnly"></div>
+    <div>
+        <label asp-for="EmailOrUserName"></label><br />
+        <input asp-for="EmailOrUserName" />
+        <span asp-validation-for="EmailOrUserName"></span>
+    </div>
+    <div>
+        <label asp-for="Password"></label><br />
+        <input asp-for="Password" />
+        <span asp-validation-for="Password"></span><br />
+    </div>
+    <div>
+        <label asp-for="RememberMe"></label>
+        <input asp-for="RememberMe" />
+    </div>
+    <div>
+        <input type="submit" value="Login" />
+    </div>
+    <br /><p>Don't have an account? <a asp-action="Register" asp-controller="Account">Sign up</a>.</p>
+</form>
